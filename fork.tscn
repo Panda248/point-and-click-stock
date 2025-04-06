@@ -1,0 +1,63 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxt7sresr55g4"]
+
+[ext_resource type="Script" uid="uid://cukja436bsfsh" path="res://fork.gd" id="1_al7w5"]
+[ext_resource type="Script" uid="uid://cfmqhbxo7hycn" path="res://video_cycler.gd" id="2_vbx0n"]
+[ext_resource type="VideoStream" uid="uid://b6js17fpguiq3" path="res://assets/videos/AdobeStock_483586936_Video_4K_Preview.mp4" id="3_al7w5"]
+[ext_resource type="VideoStream" uid="uid://cbm0620rpqcye" path="res://assets/videos/AdobeStock_678462987_Video_4K_Preview.mp4" id="4_mwxyi"]
+
+[node name="Fork" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_al7w5")
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+autoplay = true
+expand = true
+script = ExtResource("2_vbx0n")
+videos = Array[VideoStream]([ExtResource("3_al7w5"), ExtResource("4_mwxyi")])
+
+[node name="Hallway" type="Button" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+grow_horizontal = 0
+grow_vertical = 2
+focus_mode = 0
+flat = true
+
+[node name="Computer" type="Button" parent="."]
+custom_minimum_size = Vector2(500, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = 25.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+focus_mode = 0
+flat = true
+
+[connection signal="finished" from="VideoStreamPlayer" to="VideoStreamPlayer" method="_on_finished"]
+[connection signal="pressed" from="Hallway" to="." method="_on_hallway_pressed"]
+[connection signal="pressed" from="Computer" to="." method="_on_computer_pressed"]

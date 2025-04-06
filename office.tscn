@@ -1,0 +1,35 @@
+[gd_scene load_steps=8 format=3 uid="uid://l6xe3deye6rn"]
+
+[ext_resource type="Texture2D" uid="uid://7nqenecyu6dt" path="res://assets/images/AdobeStock_208502104_Preview.jpeg" id="1_g3mwp"]
+[ext_resource type="Script" uid="uid://cunpifrrlew0" path="res://office_scene.gd" id="1_u8nhc"]
+[ext_resource type="Texture2D" uid="uid://2lxjmru84yy0" path="res://assets/images/AdobeStock_207775546_Preview.jpeg" id="2_lcnwv"]
+[ext_resource type="AudioStream" uid="uid://bdt0wsrpfvj7t" path="res://assets/sound/walking-sound-effect-272246.mp3" id="3_43ocd"]
+[ext_resource type="Texture2D" uid="uid://drlhosgkk73u7" path="res://assets/images/AdobeStock_207775557_Preview.jpeg" id="4_4i814"]
+[ext_resource type="Texture2D" uid="uid://dx56lxl1chihh" path="res://assets/images/AdobeStock_207775536_Preview.jpeg" id="5_wruqr"]
+[ext_resource type="PackedScene" uid="uid://cxt7sresr55g4" path="res://fork.tscn" id="6_4i814"]
+
+[node name="Office" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_u8nhc")
+stamp = Array[float]([1.0, 2.0, 3.0, 4.0])
+textures = Array[Texture2D]([ExtResource("1_g3mwp"), ExtResource("4_4i814"), ExtResource("2_lcnwv"), ExtResource("5_wruqr")])
+nextScene = ExtResource("6_4i814")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_g3mwp")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_43ocd")
+autoplay = true
+parameters/looping = false
