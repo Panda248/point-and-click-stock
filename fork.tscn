@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://cxt7sresr55g4"]
+[gd_scene load_steps=8 format=3 uid="uid://cxt7sresr55g4"]
 
 [ext_resource type="Script" uid="uid://cukja436bsfsh" path="res://fork.gd" id="1_al7w5"]
+[ext_resource type="PackedScene" uid="uid://bjdp6tjtmjete" path="res://bossy_boss.tscn" id="2_hd76s"]
 [ext_resource type="Script" uid="uid://cfmqhbxo7hycn" path="res://video_cycler.gd" id="2_vbx0n"]
+[ext_resource type="PackedScene" uid="uid://bsv0xua87y2n7" path="res://chair_race.tscn" id="3_5cl7l"]
 [ext_resource type="VideoStream" uid="uid://b6js17fpguiq3" path="res://assets/videos/AdobeStock_483586936_Video_4K_Preview.mp4" id="3_al7w5"]
 [ext_resource type="VideoStream" uid="uid://cbm0620rpqcye" path="res://assets/videos/AdobeStock_678462987_Video_4K_Preview.mp4" id="4_mwxyi"]
+[ext_resource type="PackedScene" uid="uid://bsv5jycpeeg7q" path="res://fly.tscn" id="4_o55fs"]
 
 [node name="Fork" type="Control"]
 layout_mode = 3
@@ -15,6 +18,9 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_al7w5")
+computer_scene = ExtResource("2_hd76s")
+hallway_scene = ExtResource("3_5cl7l")
+window_scene = ExtResource("4_o55fs")
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
 layout_mode = 1
@@ -31,12 +37,9 @@ videos = Array[VideoStream]([ExtResource("3_al7w5"), ExtResource("4_mwxyi")])
 [node name="Hallway" type="Button" parent="."]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 1
-anchors_preset = 11
-anchor_left = 1.0
-anchor_right = 1.0
+anchors_preset = 9
 anchor_bottom = 1.0
-offset_left = -8.0
-grow_horizontal = 0
+offset_right = 8.0
 grow_vertical = 2
 focus_mode = 0
 flat = true
@@ -58,6 +61,23 @@ grow_vertical = 2
 focus_mode = 0
 flat = true
 
+[node name="Window" type="Button" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+grow_horizontal = 0
+grow_vertical = 2
+focus_mode = 0
+flat = true
+
+[node name="SleepTimer" type="Timer" parent="."]
+wait_time = 30.0
+
 [connection signal="finished" from="VideoStreamPlayer" to="VideoStreamPlayer" method="_on_finished"]
 [connection signal="pressed" from="Hallway" to="." method="_on_hallway_pressed"]
 [connection signal="pressed" from="Computer" to="." method="_on_computer_pressed"]
+[connection signal="pressed" from="Window" to="." method="_on_window_pressed"]

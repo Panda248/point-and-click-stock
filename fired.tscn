@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://17mup81hduhj"]
+
+[ext_resource type="VideoStream" uid="uid://gchgsiwmxpjg" path="res://assets/videos/AdobeStock_1164996028_Video_4K_Preview.mp4" id="1_clov2"]
+[ext_resource type="AudioStream" uid="uid://cb0l8es5ixa5x" path="res://assets/sound/10099901_lose_by_ane-novak_preview.mp3" id="2_nmtos"]
+
+[node name="Fired" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("1_clov2")
+autoplay = true
+expand = true
+loop = true
+
+[node name="10099901LoseByAne-novakPreview" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_nmtos")
+autoplay = true
+parameters/looping = true
+
+[node name="10099901LoseByAne-novakPreview2" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(205, 103)
+stream = ExtResource("2_nmtos")
+autoplay = true
+parameters/looping = true
