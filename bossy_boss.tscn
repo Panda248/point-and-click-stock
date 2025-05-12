@@ -1,4 +1,13 @@
-[gd_scene format=3 uid="uid://bjdp6tjtmjete"]
+[gd_scene load_steps=9 format=3 uid="uid://bjdp6tjtmjete"]
+
+[ext_resource type="Script" uid="uid://ddo0vdmvypa2v" path="res://bossy_boss.gd" id="1_hw7ks"]
+[ext_resource type="Script" uid="uid://cfmqhbxo7hycn" path="res://video_cycler.gd" id="1_t5na6"]
+[ext_resource type="PackedScene" uid="uid://17mup81hduhj" path="res://fired.tscn" id="2_225sr"]
+[ext_resource type="VideoStream" uid="uid://c2qya4gxwkovk" path="res://assets/videos/AdobeStock_1074955701_Video_4K_Preview.mp4" id="2_t5na6"]
+[ext_resource type="VideoStream" uid="uid://dcaapfngp0a5e" path="res://assets/videos/AdobeStock_541065691_Video_HD_Preview.mp4" id="3_225sr"]
+[ext_resource type="VideoStream" uid="uid://gtpyt5bijqya" path="res://assets/videos/AdobeStock_616159553_Video_HD_Preview.mp4" id="4_bx3v6"]
+[ext_resource type="VideoStream" uid="uid://yfcwo0y0tjyw" path="res://assets/videos/AdobeStock_472797495_Video_HD_Preview.mp4" id="5_lo7w1"]
+[ext_resource type="VideoStream" uid="uid://db0x4gsjb6vyb" path="res://assets/videos/AdobeStock_414517517_Video_HD_Preview.mp4" id="6_cw1xw"]
 
 [node name="BossyBoss" type="Control"]
 layout_mode = 3
@@ -9,6 +18,8 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("1_hw7ks")
+next = ExtResource("2_225sr")
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
 layout_mode = 1
@@ -17,3 +28,19 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+autoplay = true
+expand = true
+script = ExtResource("1_t5na6")
+videos = Array[VideoStream]([ExtResource("2_t5na6"), ExtResource("3_225sr"), ExtResource("4_bx3v6"), ExtResource("5_lo7w1")])
+
+[node name="meow" type="VideoStreamPlayer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("6_cw1xw")
+
+[connection signal="finish_playback" from="VideoStreamPlayer" to="." method="_on_video_stream_player_finish_playback"]
+[connection signal="finished" from="VideoStreamPlayer" to="VideoStreamPlayer" method="_on_finished"]

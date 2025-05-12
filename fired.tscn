@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://17mup81hduhj"]
+[gd_scene load_steps=4 format=3 uid="uid://17mup81hduhj"]
 
 [ext_resource type="VideoStream" uid="uid://gchgsiwmxpjg" path="res://assets/videos/AdobeStock_1164996028_Video_4K_Preview.mp4" id="1_clov2"]
+[ext_resource type="Script" uid="uid://l0jufbdn12ud" path="res://fired.gd" id="1_gbiac"]
 [ext_resource type="AudioStream" uid="uid://cb0l8es5ixa5x" path="res://assets/sound/10099901_lose_by_ane-novak_preview.mp3" id="2_nmtos"]
 
 [node name="Fired" type="Control"]
@@ -12,6 +13,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("1_gbiac")
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
 layout_mode = 1
@@ -35,3 +37,10 @@ position = Vector2(205, 103)
 stream = ExtResource("2_nmtos")
 autoplay = true
 parameters/looping = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

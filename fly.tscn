@@ -1,4 +1,12 @@
-[gd_scene format=3 uid="uid://bsv5jycpeeg7q"]
+[gd_scene load_steps=8 format=3 uid="uid://bsv5jycpeeg7q"]
+
+[ext_resource type="Script" uid="uid://cpebbvq65vh86" path="res://fly.gd" id="1_mv3iy"]
+[ext_resource type="PackedScene" uid="uid://17mup81hduhj" path="res://fired.tscn" id="2_7c42i"]
+[ext_resource type="Script" uid="uid://cfmqhbxo7hycn" path="res://video_cycler.gd" id="3_6cv6t"]
+[ext_resource type="VideoStream" uid="uid://bvfmsv5hh2ktn" path="res://assets/videos/gettyimages-1356984532-640_adpp.mp4" id="4_1calk"]
+[ext_resource type="VideoStream" uid="uid://w1m2y526ohad" path="res://assets/videos/AdobeStock_973484248_Video_HD_Preview.mp4" id="5_4uwm6"]
+[ext_resource type="VideoStream" uid="uid://bbq7b8ucwqoi2" path="res://assets/videos/AdobeStock_271514482.mp4" id="6_icwh4"]
+[ext_resource type="VideoStream" uid="uid://dvmmf0np0i8jc" path="res://assets/videos/AdobeStock_872566236_Video_4K_Preview.mp4" id="7_oxflp"]
 
 [node name="Fly" type="Control"]
 layout_mode = 3
@@ -9,6 +17,8 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("1_mv3iy")
+next = ExtResource("2_7c42i")
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
 layout_mode = 1
@@ -17,3 +27,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+expand = true
+script = ExtResource("3_6cv6t")
+videos = Array[VideoStream]([ExtResource("4_1calk"), ExtResource("5_4uwm6"), ExtResource("6_icwh4"), ExtResource("7_oxflp")])
+
+[connection signal="finish_playback" from="VideoStreamPlayer" to="." method="_on_video_stream_player_finish_playback"]
+[connection signal="finished" from="VideoStreamPlayer" to="VideoStreamPlayer" method="_on_finished"]

@@ -1,4 +1,18 @@
-[gd_scene format=3 uid="uid://bsv0xua87y2n7"]
+[gd_scene load_steps=14 format=3 uid="uid://bsv0xua87y2n7"]
+
+[ext_resource type="Script" uid="uid://bu3usvfkvdsc" path="res://race_video_stream.gd" id="1_apafg"]
+[ext_resource type="AudioStream" uid="uid://dqmubxxhmbgmu" path="res://assets/sound/24858157_count-down_by_top-up-sounds_preview.mp3" id="2_5r6oc"]
+[ext_resource type="VideoStream" uid="uid://bkf17nkp3kxu8" path="res://assets/videos/AdobeStock_84804003_Video_HD_Preview.mp4" id="2_awmhd"]
+[ext_resource type="VideoStream" uid="uid://sf6ofbmmeke3" path="res://assets/videos/AdobeStock_193246424_Video_HD_Preview.mp4" id="3_xb5ki"]
+[ext_resource type="PackedScene" uid="uid://17mup81hduhj" path="res://fired.tscn" id="4_4m2pd"]
+[ext_resource type="PackedScene" uid="uid://cs4demp2tx38u" path="res://dancing.tscn" id="4_nt7rs"]
+[ext_resource type="Texture2D" uid="uid://vj74ewpx1a8s" path="res://assets/images/Screenshot 2025-04-21 171717.png" id="4_xb5ki"]
+[ext_resource type="Script" uid="uid://d2adf5e72tkev" path="res://button_timeout.gd" id="7_ps1nl"]
+[ext_resource type="Script" uid="uid://cubvikykng5w8" path="res://dodge_button.gd" id="7_y5tgb"]
+[ext_resource type="AudioStream" uid="uid://bhjdnvcrm7mgv" path="res://assets/sound/48107006_power-explosin-whoosh-2_by_jbobstudio_preview.mp3" id="8_3fv7p"]
+[ext_resource type="AudioStream" uid="uid://dnih0i2yjv6ro" path="res://assets/sound/57558140_cartoon-goofy-voice-watch-out_by_applehillstudios_preview.mp3" id="8_i6wsu"]
+[ext_resource type="Script" uid="uid://nvaxb3svivi2" path="res://audio_stream_player.gd" id="9_ls11f"]
+[ext_resource type="VideoStream" uid="uid://rvaheg2j8ovd" path="res://assets/videos/AdobeStock_333926022_Video_HD_Preview.mp4" id="9_nt7rs"]
 
 [node name="Chair Race" type="Control"]
 layout_mode = 3
@@ -17,3 +31,76 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+expand = true
+script = ExtResource("1_apafg")
+videos = Array[VideoStream]([ExtResource("2_awmhd"), ExtResource("3_xb5ki")])
+dodgeScene = ExtResource("4_nt7rs")
+explodeScene = ExtResource("4_4m2pd")
+
+[node name="TextureRect" type="TextureRect" parent="VideoStreamPlayer"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_xb5ki")
+expand_mode = 3
+
+[node name="24858157Count-downByTop-up-soundsPreview" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_5r6oc")
+autoplay = true
+
+[node name="explode" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_3fv7p")
+
+[node name="wathcout" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_i6wsu")
+script = ExtResource("9_ls11f")
+
+[node name="ButtonSpawn" type="Timer" parent="."]
+wait_time = 25.0
+one_shot = true
+autostart = true
+
+[node name="ButtonTimeout" type="Timer" parent="." node_paths=PackedStringArray("explosion", "timer", "explodesound")]
+wait_time = 2.0
+one_shot = true
+script = ExtResource("7_ps1nl")
+explosion = NodePath("../Explosion")
+timer = NodePath("../explosiontimeout")
+explodesound = NodePath("../explode")
+
+[node name="explosiontimeout" type="Timer" parent="."]
+
+[node name="Explosion" type="VideoStreamPlayer" parent="."]
+layout_mode = 0
+offset_right = 500.0
+offset_bottom = 500.0
+stream = ExtResource("9_nt7rs")
+expand = true
+loop = true
+
+[node name="Dodge Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.2
+anchor_top = 0.25
+anchor_right = 0.4
+anchor_bottom = 0.4
+focus_mode = 0
+text = "Dodge!"
+script = ExtResource("7_y5tgb")
+
+[connection signal="finished" from="VideoStreamPlayer" to="VideoStreamPlayer" method="_on_finished"]
+[connection signal="finished" from="24858157Count-downByTop-up-soundsPreview" to="VideoStreamPlayer" method="_on_countdown_by_topupsounds_preview_finished"]
+[connection signal="timeout" from="ButtonSpawn" to="wathcout" method="_on_button_spawn_timeout"]
+[connection signal="timeout" from="ButtonSpawn" to="ButtonTimeout" method="_on_button_spawn_timeout"]
+[connection signal="timeout" from="ButtonSpawn" to="Dodge Button" method="_on_button_spawn_timeout"]
+[connection signal="timeout" from="ButtonTimeout" to="explode" method="_on_button_timeout_timeout"]
+[connection signal="timeout" from="ButtonTimeout" to="ButtonTimeout" method="_on_timeout"]
+[connection signal="timeout" from="ButtonTimeout" to="Dodge Button" method="_on_button_timeout_timeout"]
+[connection signal="timeout" from="explosiontimeout" to="VideoStreamPlayer" method="_on_explosiontimeout_timeout"]
+[connection signal="pressed" from="Dodge Button" to="ButtonTimeout" method="_on_dodge_button_pressed"]
+[connection signal="pressed" from="Dodge Button" to="Dodge Button" method="_on_pressed"]

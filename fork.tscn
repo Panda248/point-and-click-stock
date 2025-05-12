@@ -42,7 +42,7 @@ anchor_bottom = 1.0
 offset_right = 8.0
 grow_vertical = 2
 focus_mode = 0
-flat = true
+text = "Hallway"
 
 [node name="Computer" type="Button" parent="."]
 custom_minimum_size = Vector2(500, 200)
@@ -59,7 +59,7 @@ offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
 focus_mode = 0
-flat = true
+text = "Computer"
 
 [node name="Window" type="Button" parent="."]
 custom_minimum_size = Vector2(100, 0)
@@ -72,7 +72,7 @@ offset_left = -8.0
 grow_horizontal = 0
 grow_vertical = 2
 focus_mode = 0
-flat = true
+text = "Window"
 
 [node name="SleepTimer" type="Timer" parent="."]
 wait_time = 30.0

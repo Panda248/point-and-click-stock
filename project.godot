@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Point and Click Stock"
+config/description="enter to restart at the end"
 run/main_scene="uid://l6xe3deye6rn"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 config/icon="res://icon.svg"
@@ -23,3 +24,4 @@ project/assembly_name="Point and Click Stock"
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
